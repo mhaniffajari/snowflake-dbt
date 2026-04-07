@@ -18,7 +18,7 @@
 --   CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION ...
 -- =============================================================================
 
-USE ROLE accountadmin;
+USE ROLE ACCOUNTADMIN;
 
 -- =============================================================================
 -- STEP 1: Create a warehouse for executing workspace actions
