@@ -10,7 +10,7 @@ CREATE OR ALTER TASK run_tasty_bytes_subset
   AS
       execute dbt project my_dbt_project_object_gh_action args='build --select raw_customers stg_customers customers --target prod';
 
--- Builds all models and runs tests in DAG order, failing early if any upstream test breaks
+-- Builds all models and runs tests in DAG order, failing early if any test fails
 CREATE OR ALTER TASK run_tasty_bytes_full
   WAREHOUSE = tasty_bytes_dbt_wh
   AFTER run_tasty_bytes_subset
