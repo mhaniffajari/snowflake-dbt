@@ -1,0 +1,8 @@
+version: 2
+sources:
+- name: abc_bank
+  description: 'Point of Sale source data'
+  database: PORTFOLIO_TRACKING
+  schema: SOURCE_DATA
+  tables:
+  - name: ABC_BANK_POSITION
