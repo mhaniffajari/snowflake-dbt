@@ -1,5 +1,5 @@
 ## Project
-name: tasty_bytes
+name: portfolio_tracking
 version: "1.0"
 config-version: 2
 profile: tasty_bytes
@@ -18,8 +18,18 @@ clean-targets: [target, dbt_modules]
 
 ## Models
 models:
-  tasty_bytes:
-    staging:
+  portfolio_tracking:
+    +materialized: view
+    staging:    # Data storage layer
       +materialized: view
-    marts:
-      +materialized: table
+      +schema: STAGING
+    refined:    # Refined data layer
+      +materialized: view
+      +schema: REFINED
+    marts:      # Data delivery layer
+      portfolio:     # one specific data mart
+        +materialized: table
+        +schema: MART_PORTFOLIO
+snapshots:
+  portfolio_tracking:
+    +target_schema: SNAPSHOTS
