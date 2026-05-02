@@ -32,3 +32,11 @@ models:
 snapshots:
   portfolio_tracking:
     +target_schema: SNAPSHOTS
+seeds:
+ +schema : "{{target.schema}}_SEED_DATA"
+ portfolio_tracking:
+  ABC_SECURIY_INFO:
+    +post-hook:
+    - "UPDATE {{ this }} SET LOAD_TS = '{{ run_started_at }}' WHERE LOAD_TS is null"
+    +column_types:
+      LOAD_TS : TIMESTAMP

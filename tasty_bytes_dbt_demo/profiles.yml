@@ -7,7 +7,7 @@ tasty_bytes:
       user: 'not needed'
       role: accountadmin
       database: DEV_ANALYTICS
-      schema: dev
+      schema: DEV
       warehouse: DEV_DBT_WH
       threads: 8
     prod:
@@ -16,6 +16,6 @@ tasty_bytes:
       user: 'not needed'
       role: accountadmin
       database: DEV_ANALYTICS
-      schema: prod
+      schema: PROD
       warehouse: DEV_DBT_WH
       threads: 8
