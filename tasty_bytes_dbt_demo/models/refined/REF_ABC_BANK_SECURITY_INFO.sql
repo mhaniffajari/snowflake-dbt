@@ -1,39 +1,6 @@
-WITH src_data AS (
-
-    SELECT
-          SECURITY_CODE  AS SECURITY_CODE
-        , SECURITY_NAME  AS SECURITY_NAME
-        , SECTOR         AS SECTOR_NAME
-        , INDUSTRY       AS INDUSTRY_NAME
-        , COUNTRY        AS COUNTRY_CODE
-        , EXCHANGE       AS EXCHANGE_CODE
-        , LOAD_TS        AS LOAD_TS
-        , 'SEED.ABC_BANK_SECURITY_INFO' AS RECORD_SOURCE
-
-    FROM {{ source('seeds', 'ABC_BANK_SECURITY_INFO') }}
-
-),
-
-hashed AS (
-
-    SELECT
-          CONCAT_WS('|', SECURITY_CODE) AS SECURITY_HKEY
-
-        , CONCAT_WS('|',
-              SECURITY_CODE,
-              SECURITY_NAME,
-              SECTOR_NAME,
-              INDUSTRY_NAME,
-              COUNTRY_CODE,
-              EXCHANGE_CODE
-          ) AS SECURITY_HDIFF
-
-        , * EXCLUDE (LOAD_TS)
-
-        , LOAD_TS AS LOAD_TS_UTC
-
-    FROM src_data
-
+WITH current_from_snapshot as (
+{{
+current_snapshot (snsh_ref = ref('SNSH_ABC_BANK_SECURITY_INFO'), output_load_ts=false)
+}}
 )
-
-SELECT * FROM hashed
+SELECT * from current_from_snapshot
